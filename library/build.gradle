@@ -20,8 +20,6 @@ dependencies {
     apply from: '../config/testdeps.gradle', to:it
 }
 
-apply from: '../config/style.gradle'
-apply from: '../config/coverage.gradle'
 apply from: '../config/javadoc.gradle'
 
 artifacts {
