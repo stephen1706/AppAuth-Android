@@ -1179,27 +1179,27 @@ public class AuthorizationRequest implements AuthorizationManagementRequest {
     @Override
     @NonNull
     public Uri toUri() {
-        Uri.Builder uriBuilder = configuration.authorizationEndpoint.buildUpon()
-            .appendQueryParameter(PARAM_REDIRECT_URI, redirectUri.toString())
-            .appendQueryParameter(PARAM_CLIENT_ID, clientId)
-            .appendQueryParameter(PARAM_RESPONSE_TYPE, responseType);
+        Uri.Builder uriBuilder = configuration.authorizationEndpoint.buildUpon();
+//            .appendQueryParameter(PARAM_REDIRECT_URI, redirectUri.toString())
+//            .appendQueryParameter(PARAM_CLIENT_ID, clientId)
+//            .appendQueryParameter(PARAM_RESPONSE_TYPE, responseType);
 
-        UriUtil.appendQueryParameterIfNotNull(uriBuilder, PARAM_DISPLAY, display);
-        UriUtil.appendQueryParameterIfNotNull(uriBuilder, PARAM_LOGIN_HINT, loginHint);
-        UriUtil.appendQueryParameterIfNotNull(uriBuilder, PARAM_PROMPT, prompt);
-        UriUtil.appendQueryParameterIfNotNull(uriBuilder, PARAM_UI_LOCALES, uiLocales);
-        UriUtil.appendQueryParameterIfNotNull(uriBuilder, PARAM_STATE, state);
-        UriUtil.appendQueryParameterIfNotNull(uriBuilder, PARAM_NONCE, nonce);
-        UriUtil.appendQueryParameterIfNotNull(uriBuilder, PARAM_SCOPE, scope);
-        UriUtil.appendQueryParameterIfNotNull(uriBuilder, PARAM_RESPONSE_MODE, responseMode);
-
-        if (codeVerifier != null) {
-            uriBuilder.appendQueryParameter(PARAM_CODE_CHALLENGE, codeVerifierChallenge)
-                .appendQueryParameter(PARAM_CODE_CHALLENGE_METHOD, codeVerifierChallengeMethod);
-        }
-
-        UriUtil.appendQueryParameterIfNotNull(uriBuilder, PARAM_CLAIMS, claims);
-        UriUtil.appendQueryParameterIfNotNull(uriBuilder, PARAM_CLAIMS_LOCALES, claimsLocales);
+//        UriUtil.appendQueryParameterIfNotNull(uriBuilder, PARAM_DISPLAY, display);
+//        UriUtil.appendQueryParameterIfNotNull(uriBuilder, PARAM_LOGIN_HINT, loginHint);
+//        UriUtil.appendQueryParameterIfNotNull(uriBuilder, PARAM_PROMPT, prompt);
+//        UriUtil.appendQueryParameterIfNotNull(uriBuilder, PARAM_UI_LOCALES, uiLocales);
+//        UriUtil.appendQueryParameterIfNotNull(uriBuilder, PARAM_STATE, state);
+//        UriUtil.appendQueryParameterIfNotNull(uriBuilder, PARAM_NONCE, nonce);
+//        UriUtil.appendQueryParameterIfNotNull(uriBuilder, PARAM_SCOPE, scope);
+//        UriUtil.appendQueryParameterIfNotNull(uriBuilder, PARAM_RESPONSE_MODE, responseMode);
+//
+//        if (codeVerifier != null) {
+//            uriBuilder.appendQueryParameter(PARAM_CODE_CHALLENGE, codeVerifierChallenge)
+//                .appendQueryParameter(PARAM_CODE_CHALLENGE_METHOD, codeVerifierChallengeMethod);
+//        }
+//
+//        UriUtil.appendQueryParameterIfNotNull(uriBuilder, PARAM_CLAIMS, claims);
+//        UriUtil.appendQueryParameterIfNotNull(uriBuilder, PARAM_CLAIMS_LOCALES, claimsLocales);
 
         for (Entry<String, String> entry : additionalParameters.entrySet()) {
             uriBuilder.appendQueryParameter(entry.getKey(), entry.getValue());
