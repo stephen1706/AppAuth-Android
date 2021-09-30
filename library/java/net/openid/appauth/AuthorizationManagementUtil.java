@@ -14,12 +14,11 @@
 
 package net.openid.appauth;
 
-import static net.openid.appauth.Preconditions.checkNotNull;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Base64;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -54,12 +53,11 @@ class AuthorizationManagementUtil {
     /**
      * Reads an authorization request from a JSON string representation produced by either
      * {@link AuthorizationRequest#jsonSerialize()} or {@link EndSessionRequest#jsonSerialize()}.
+     *
      * @throws JSONException if the provided JSON does not match the expected structure.
      */
     static AuthorizationManagementRequest requestFrom(String jsonStr, String type)
-            throws JSONException {
-//        checkNotNull(jsonStr, "jsonStr can not be null");
-
+        throws JSONException {
         JSONObject json = new JSONObject();
         if (REQUEST_TYPE_AUTHORIZATION.equals(type)) {
             return AuthorizationRequest.jsonDeserialize(json);
@@ -79,7 +77,7 @@ class AuthorizationManagementUtil {
      */
     @SuppressLint("VisibleForTests")
     static AuthorizationManagementResponse responseWith(
-            AuthorizationManagementRequest request, Uri uri) {
+        AuthorizationManagementRequest request, Uri uri) {
         if (request instanceof AuthorizationRequest) {
             return new AuthorizationResponse.Builder((AuthorizationRequest) request)
                 .fromUri(uri)

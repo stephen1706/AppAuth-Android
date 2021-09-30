@@ -23,11 +23,13 @@ import static net.openid.appauth.Preconditions.checkNullOrNotEmpty;
 
 import android.net.Uri;
 import android.text.TextUtils;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import net.openid.appauth.internal.UriUtil;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -260,6 +262,7 @@ public class AuthorizationRequest implements AuthorizationManagementRequest {
         /**
          * Instructs the authorization server to send response parameters using
          * the fragment portion of the redirect URI.
+         *
          * @see "OAuth 2.0 Multiple Response Type Encoding Practices, Section 2.1
          * <http://openid.net/specs/oauth-v2-multiple-response-types-1_0.html#rfc.section.2.1>"
          */
@@ -312,20 +315,20 @@ public class AuthorizationRequest implements AuthorizationManagementRequest {
     static final String PARAM_CLAIMS_LOCALES = "claims_locales";
 
     private static final Set<String> BUILT_IN_PARAMS = builtInParams(
-            PARAM_CLIENT_ID,
-            PARAM_CODE_CHALLENGE,
-            PARAM_CODE_CHALLENGE_METHOD,
-            PARAM_DISPLAY,
-            PARAM_LOGIN_HINT,
-            PARAM_PROMPT,
-            PARAM_UI_LOCALES,
-            PARAM_REDIRECT_URI,
-            PARAM_RESPONSE_MODE,
-            PARAM_RESPONSE_TYPE,
-            PARAM_SCOPE,
-            PARAM_STATE,
-            PARAM_CLAIMS,
-            PARAM_CLAIMS_LOCALES);
+        PARAM_CLIENT_ID,
+        PARAM_CODE_CHALLENGE,
+        PARAM_CODE_CHALLENGE_METHOD,
+        PARAM_DISPLAY,
+        PARAM_LOGIN_HINT,
+        PARAM_PROMPT,
+        PARAM_UI_LOCALES,
+        PARAM_REDIRECT_URI,
+        PARAM_RESPONSE_MODE,
+        PARAM_RESPONSE_TYPE,
+        PARAM_SCOPE,
+        PARAM_STATE,
+        PARAM_CLAIMS,
+        PARAM_CLAIMS_LOCALES);
 
     private static final String KEY_CONFIGURATION = "configuration";
     private static final String KEY_CLIENT_ID = "clientId";
@@ -635,10 +638,10 @@ public class AuthorizationRequest implements AuthorizationManagementRequest {
          * {@link AuthorizationRequest#nonce} and {@link AuthorizationRequest#codeVerifier}.
          */
         public Builder(
-                @NonNull AuthorizationServiceConfiguration configuration,
-                @NonNull String clientId,
-                @NonNull String responseType,
-                @NonNull Uri redirectUri) {
+            @NonNull AuthorizationServiceConfiguration configuration,
+            @NonNull String clientId,
+            @NonNull String responseType,
+            @NonNull Uri redirectUri) {
             setAuthorizationServiceConfiguration(configuration);
             setClientId(clientId);
             setResponseType(responseType);
@@ -652,9 +655,9 @@ public class AuthorizationRequest implements AuthorizationManagementRequest {
          * Specifies the service configuration to be used in dispatching this request.
          */
         public Builder setAuthorizationServiceConfiguration(
-                @NonNull AuthorizationServiceConfiguration configuration) {
+            @NonNull AuthorizationServiceConfiguration configuration) {
             mConfiguration = checkNotNull(configuration,
-                    "configuration cannot be null");
+                "configuration cannot be null");
             return this;
         }
 
@@ -803,7 +806,7 @@ public class AuthorizationRequest implements AuthorizationManagementRequest {
         @NonNull
         public Builder setResponseType(@NonNull String responseType) {
             mResponseType = checkNotEmpty(responseType,
-                    "expected response type cannot be null or empty");
+                "expected response type cannot be null or empty");
             return this;
         }
 
@@ -941,21 +944,21 @@ public class AuthorizationRequest implements AuthorizationManagementRequest {
          */
         @NonNull
         public Builder setCodeVerifier(
-                @Nullable String codeVerifier,
-                @Nullable String codeVerifierChallenge,
-                @Nullable String codeVerifierChallengeMethod) {
+            @Nullable String codeVerifier,
+            @Nullable String codeVerifierChallenge,
+            @Nullable String codeVerifierChallengeMethod) {
             if (codeVerifier != null) {
                 CodeVerifierUtil.checkCodeVerifier(codeVerifier);
                 checkNotEmpty(codeVerifierChallenge,
-                        "code verifier challenge cannot be null or empty if verifier is set");
+                    "code verifier challenge cannot be null or empty if verifier is set");
                 checkNotEmpty(codeVerifierChallengeMethod,
-                        "code verifier challenge method cannot be null or empty if verifier "
-                                + "is set");
+                    "code verifier challenge method cannot be null or empty if verifier "
+                        + "is set");
             } else {
                 checkArgument(codeVerifierChallenge == null,
-                        "code verifier challenge must be null if verifier is null");
+                    "code verifier challenge must be null if verifier is null");
                 checkArgument(codeVerifierChallengeMethod == null,
-                        "code verifier challenge method must be null if verifier is null");
+                    "code verifier challenge method must be null if verifier is null");
             }
 
             mCodeVerifier = codeVerifier;
@@ -1003,8 +1006,8 @@ public class AuthorizationRequest implements AuthorizationManagementRequest {
          */
         public Builder setClaimsLocales(@Nullable String claimsLocales) {
             mClaimsLocales = checkNullOrNotEmpty(
-                    claimsLocales,
-                    "claimsLocales must be null or not empty");
+                claimsLocales,
+                "claimsLocales must be null or not empty");
             return this;
         }
 
@@ -1054,56 +1057,56 @@ public class AuthorizationRequest implements AuthorizationManagementRequest {
         /**
          * Constructs the authorization request. At a minimum the following fields must have been
          * set:
-         *
+         * <p>
          * - The client ID
          * - The expected response type
          * - The redirect URI
-         *
+         * <p>
          * Failure to specify any of these parameters will result in a runtime exception.
          */
         @NonNull
         public AuthorizationRequest build() {
             return new AuthorizationRequest(
-                    mConfiguration,
-                    mClientId,
-                    mResponseType,
-                    mRedirectUri,
-                    mDisplay,
-                    mLoginHint,
-                    mPrompt,
-                    mUiLocales,
-                    mScope,
-                    mState,
-                    mNonce,
-                    mCodeVerifier,
-                    mCodeVerifierChallenge,
-                    mCodeVerifierChallengeMethod,
-                    mResponseMode,
-                    mClaims,
-                    mClaimsLocales,
-                    Collections.unmodifiableMap(new HashMap<>(mAdditionalParameters)));
+                mConfiguration,
+                mClientId,
+                mResponseType,
+                mRedirectUri,
+                mDisplay,
+                mLoginHint,
+                mPrompt,
+                mUiLocales,
+                mScope,
+                mState,
+                mNonce,
+                mCodeVerifier,
+                mCodeVerifierChallenge,
+                mCodeVerifierChallengeMethod,
+                mResponseMode,
+                mClaims,
+                mClaimsLocales,
+                Collections.unmodifiableMap(new HashMap<>(mAdditionalParameters)));
         }
     }
 
     private AuthorizationRequest(
-            @NonNull AuthorizationServiceConfiguration configuration,
-            @NonNull String clientId,
-            @NonNull String responseType,
-            @NonNull Uri redirectUri,
-            @Nullable String display,
-            @Nullable String loginHint,
-            @Nullable String prompt,
-            @Nullable String uiLocales,
-            @Nullable String scope,
-            @Nullable String state,
-            @Nullable String nonce,
-            @Nullable String codeVerifier,
-            @Nullable String codeVerifierChallenge,
-            @Nullable String codeVerifierChallengeMethod,
-            @Nullable String responseMode,
-            @Nullable JSONObject claims,
-            @Nullable String claimsLocales,
-            @NonNull Map<String, String> additionalParameters) {
+        @NonNull AuthorizationServiceConfiguration configuration,
+        @NonNull String clientId,
+        @NonNull String responseType,
+        @NonNull Uri redirectUri,
+        @Nullable String display,
+        @Nullable String loginHint,
+        @Nullable String prompt,
+        @Nullable String uiLocales,
+        @Nullable String scope,
+        @Nullable String state,
+        @Nullable String nonce,
+        @Nullable String codeVerifier,
+        @Nullable String codeVerifierChallenge,
+        @Nullable String codeVerifierChallengeMethod,
+        @Nullable String responseMode,
+        @Nullable JSONObject claims,
+        @Nullable String claimsLocales,
+        @NonNull Map<String, String> additionalParameters) {
         // mandatory fields
         this.configuration = configuration;
         this.clientId = clientId;
@@ -1177,9 +1180,9 @@ public class AuthorizationRequest implements AuthorizationManagementRequest {
     @NonNull
     public Uri toUri() {
         Uri.Builder uriBuilder = configuration.authorizationEndpoint.buildUpon()
-                .appendQueryParameter(PARAM_REDIRECT_URI, redirectUri.toString())
-                .appendQueryParameter(PARAM_CLIENT_ID, clientId)
-                .appendQueryParameter(PARAM_RESPONSE_TYPE, responseType);
+            .appendQueryParameter(PARAM_REDIRECT_URI, redirectUri.toString())
+            .appendQueryParameter(PARAM_CLIENT_ID, clientId)
+            .appendQueryParameter(PARAM_RESPONSE_TYPE, responseType);
 
         UriUtil.appendQueryParameterIfNotNull(uriBuilder, PARAM_DISPLAY, display);
         UriUtil.appendQueryParameterIfNotNull(uriBuilder, PARAM_LOGIN_HINT, loginHint);
@@ -1192,7 +1195,7 @@ public class AuthorizationRequest implements AuthorizationManagementRequest {
 
         if (codeVerifier != null) {
             uriBuilder.appendQueryParameter(PARAM_CODE_CHALLENGE, codeVerifierChallenge)
-                    .appendQueryParameter(PARAM_CODE_CHALLENGE_METHOD, codeVerifierChallengeMethod);
+                .appendQueryParameter(PARAM_CODE_CHALLENGE_METHOD, codeVerifierChallengeMethod);
         }
 
         UriUtil.appendQueryParameterIfNotNull(uriBuilder, PARAM_CLAIMS, claims);
@@ -1227,12 +1230,12 @@ public class AuthorizationRequest implements AuthorizationManagementRequest {
         JsonUtil.putIfNotNull(json, KEY_CODE_VERIFIER, codeVerifier);
         JsonUtil.putIfNotNull(json, KEY_CODE_VERIFIER_CHALLENGE, codeVerifierChallenge);
         JsonUtil.putIfNotNull(json, KEY_CODE_VERIFIER_CHALLENGE_METHOD,
-                codeVerifierChallengeMethod);
+            codeVerifierChallengeMethod);
         JsonUtil.putIfNotNull(json, KEY_RESPONSE_MODE, responseMode);
         JsonUtil.putIfNotNull(json, KEY_CLAIMS, claims);
         JsonUtil.putIfNotNull(json, KEY_CLAIMS_LOCALES, claimsLocales);
         JsonUtil.put(json, KEY_ADDITIONAL_PARAMETERS,
-                JsonUtil.mapToJsonObject(additionalParameters));
+            JsonUtil.mapToJsonObject(additionalParameters));
         return json;
     }
 
@@ -1249,42 +1252,43 @@ public class AuthorizationRequest implements AuthorizationManagementRequest {
     /**
      * Reads an authorization request from a JSON string representation produced by
      * {@link #jsonSerialize()}.
+     *
      * @throws JSONException if the provided JSON does not match the expected structure.
      */
     @NonNull
     public static AuthorizationRequest jsonDeserialize(@NonNull JSONObject json)
-            throws JSONException {
-//        checkNotNull(json, "json cannot be null");
+        throws JSONException {
         return new AuthorizationRequest(
-                AuthorizationServiceConfiguration.fromJson(json.getJSONObject(KEY_CONFIGURATION)),
-                JsonUtil.getString(json, KEY_CLIENT_ID),
-                JsonUtil.getString(json, KEY_RESPONSE_TYPE),
-                JsonUtil.getUri(json, KEY_REDIRECT_URI),
-                JsonUtil.getStringIfDefined(json, KEY_DISPLAY),
-                JsonUtil.getStringIfDefined(json, KEY_LOGIN_HINT),
-                JsonUtil.getStringIfDefined(json, KEY_PROMPT),
-                JsonUtil.getStringIfDefined(json, KEY_UI_LOCALES),
-                JsonUtil.getStringIfDefined(json, KEY_SCOPE),
-                JsonUtil.getStringIfDefined(json, KEY_STATE),
-                JsonUtil.getStringIfDefined(json, KEY_NONCE),
-                JsonUtil.getStringIfDefined(json, KEY_CODE_VERIFIER),
-                JsonUtil.getStringIfDefined(json, KEY_CODE_VERIFIER_CHALLENGE),
-                JsonUtil.getStringIfDefined(json, KEY_CODE_VERIFIER_CHALLENGE_METHOD),
-                JsonUtil.getStringIfDefined(json, KEY_RESPONSE_MODE),
-                JsonUtil.getJsonObjectIfDefined(json, KEY_CLAIMS),
-                JsonUtil.getStringIfDefined(json, KEY_CLAIMS_LOCALES),
-                JsonUtil.getStringMap(json, KEY_ADDITIONAL_PARAMETERS));
+            AuthorizationServiceConfiguration.fromJson(json.getJSONObject(KEY_CONFIGURATION)),
+            JsonUtil.getString(json, KEY_CLIENT_ID),
+            JsonUtil.getString(json, KEY_RESPONSE_TYPE),
+            JsonUtil.getUri(json, KEY_REDIRECT_URI),
+            JsonUtil.getStringIfDefined(json, KEY_DISPLAY),
+            JsonUtil.getStringIfDefined(json, KEY_LOGIN_HINT),
+            JsonUtil.getStringIfDefined(json, KEY_PROMPT),
+            JsonUtil.getStringIfDefined(json, KEY_UI_LOCALES),
+            JsonUtil.getStringIfDefined(json, KEY_SCOPE),
+            JsonUtil.getStringIfDefined(json, KEY_STATE),
+            JsonUtil.getStringIfDefined(json, KEY_NONCE),
+            JsonUtil.getStringIfDefined(json, KEY_CODE_VERIFIER),
+            JsonUtil.getStringIfDefined(json, KEY_CODE_VERIFIER_CHALLENGE),
+            JsonUtil.getStringIfDefined(json, KEY_CODE_VERIFIER_CHALLENGE_METHOD),
+            JsonUtil.getStringIfDefined(json, KEY_RESPONSE_MODE),
+            JsonUtil.getJsonObjectIfDefined(json, KEY_CLAIMS),
+            JsonUtil.getStringIfDefined(json, KEY_CLAIMS_LOCALES),
+            JsonUtil.getStringMap(json, KEY_ADDITIONAL_PARAMETERS));
     }
 
     /**
      * Reads an authorization request from a JSON string representation produced by
      * {@link #jsonSerializeString()}. This method is just a convenience wrapper for
      * {@link #jsonDeserialize(JSONObject)}, converting the JSON string to its JSON object form.
+     *
      * @throws JSONException if the provided JSON does not match the expected structure.
      */
     @NonNull
     public static AuthorizationRequest jsonDeserialize(@NonNull String jsonStr)
-            throws JSONException {
+        throws JSONException {
         checkNotNull(jsonStr, "json string cannot be null");
         return jsonDeserialize(new JSONObject(jsonStr));
     }
