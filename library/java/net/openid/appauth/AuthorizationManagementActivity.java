@@ -319,7 +319,7 @@ public class AuthorizationManagementActivity extends AppCompatActivity {
 //            mAuthRequest = authRequestJson != null
 //                    ? AuthorizationManagementUtil.requestFrom(authRequestJson, authRequestType)
 //                    : null;
-            mAuthRequest = AuthorizationManagementUtil.requestFrom(authRequestJson, authRequestType);
+            mAuthRequest = AuthorizationManagementUtil.requestFrom(null, authRequestType);
         } catch (JSONException ex) {
             sendResult(
                     mCancelIntent,
