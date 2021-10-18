@@ -669,7 +669,7 @@ public class AuthorizationRequest implements AuthorizationManagementRequest {
          */
         @NonNull
         public Builder setClientId(@NonNull String clientId) {
-            mClientId = checkNotEmpty(clientId, "client ID cannot be null or empty");
+            mClientId = clientId;
             return this;
         }
 
@@ -816,7 +816,7 @@ public class AuthorizationRequest implements AuthorizationManagementRequest {
          */
         @NonNull
         public Builder setRedirectUri(@NonNull Uri redirectUri) {
-            mRedirectUri = checkNotNull(redirectUri, "redirect URI cannot be null or empty");
+            mRedirectUri = redirectUri;
             return this;
         }
 

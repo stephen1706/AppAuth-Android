@@ -319,8 +319,11 @@ public class AuthorizationManagementActivity extends AppCompatActivity {
         mCompleteIntent = state.getParcelable(KEY_COMPLETE_INTENT);
         mCancelIntent = state.getParcelable(KEY_CANCEL_INTENT);
         try {
+            String authRequestJson = state.getString(KEY_AUTH_REQUEST, null);
             String authRequestType = state.getString(KEY_AUTH_REQUEST_TYPE, null);
-            mAuthRequest = AuthorizationManagementUtil.requestFrom(null, authRequestType);
+            mAuthRequest = authRequestJson != null
+                    ? AuthorizationManagementUtil.requestFrom(authRequestJson, authRequestType)
+                    : null;
         } catch (JSONException ex) {
             sendResult(
                 mCancelIntent,
